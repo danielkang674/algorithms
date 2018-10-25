@@ -1,0 +1,58 @@
+<script>
+  var MedianStream = function () {
+    this.heap = [];
+  };
+
+  MedianStream.prototype = {
+    insert: function (val) {
+      this.heap.push(val);
+      if (!this.size() === 1) return;
+      let currentIndex = this.size() - 1;
+      let parentIndex = this.findParent(currentIndex);
+      let parentVal = this.heap[parentIndex];
+      while (val < parentVal) {
+        let temp = parentVal;
+        this.heap[parentIndex] = val;
+        this.heap[currentIndex] = temp;
+        currentIndex = parentIndex;
+        parentIndex = this.findParent(currentIndex);
+        parentVal = this.heap[parentIndex];
+        if (!currentIndex) break;
+      }
+      if (currentIndex && currentIndex % 2 === 0) {
+        if (this.heap[currentIndex] < this.heap[currentIndex - 1]) {
+          let temp1 = this.heap[currentIndex - 1];
+          this.heap[currentIndex - 1] = this.heap[currentIndex];
+          this.heap[currentIndex] = temp1;
+        }
+      }
+      if (currentIndex && currentIndex % 2 === 1) {
+        if (this.heap[currentIndex] > this.heap[currentIndex + 1]) {
+          let temp2 = this.heap[currentIndex + 1];
+          this.heap[currentIndex + 1] = this.heap[currentIndex];
+          this.heap[currentIndex] = temp2;
+        }
+      }
+    },
+    findParent: function (index) {
+      return ~~(index / 2);
+    },
+    peekMedian: function () {
+      if (this.size() % 2 === 1) {
+        return this.heap[~~(this.size() / 2)];
+      }
+      return (this.heap[(this.size() / 2) - 1] + this.heap[this.size() / 2]) / 2;
+    },
+    size: function () {
+      return this.heap.length;
+    }
+  };
+
+  var mStream = new MedianStream();
+  mStream.insert(1);
+  mStream.insert(2);
+  mStream.insert(7);
+  mStream.insert(6);
+  console.log(mStream.peekMedian());
+  console.log(mStream);
+</script>
