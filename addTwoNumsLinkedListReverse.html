@@ -1,0 +1,51 @@
+<script>
+  let array1 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+  let array2 = [5, 6, 4];
+  let currNode1 = null;
+  let headNode1 = null;
+  let currNode2 = null;
+  let headNode2 = null;
+  for (let i = 0; i < array1.length; i++) {
+    if (currNode1) {
+      let tempNode = new ListNode(array1[i]);
+      currNode1.next = tempNode;
+      currNode1 = tempNode;
+    } else {
+      let tempNode = new ListNode(array1[i]);
+      currNode1 = tempNode;
+      headNode1 = tempNode;
+    }
+  }
+  for (let j = 0; j < array2.length; j++) {
+    if (currNode2) {
+      let tempNode = ListNode(array2[j]);
+      currNode2.next = tempNode;
+      currNode2 = tempNode;
+    } else {
+      let tempNode = ListNode(array2[j]);
+      currNode2 = tempNode;
+      headNode2 = tempNode;
+    }
+  }
+  var addTwoNumbers = function (l1, l2) {
+    let arr1 = [];
+    let arr2 = [];
+    let currentNode = l1;
+    while (currentNode) {
+      arr1.push(currentNode.val);
+      currentNode = currentNode.next;
+    }
+    currentNode = l2;
+    while (currentNode) {
+      arr2.push(currentNode.val);
+      currentNode = currentNode.next;
+    }
+
+  };
+  console.log(addTwoNumbers(headNode1, headNode2));
+  // [6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+  function ListNode(val) {
+    this.val = val;
+    this.next = null;
+  }
+</script>
