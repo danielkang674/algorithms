@@ -1,5 +1,5 @@
 <script>
-  let array1 = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
+  let array1 = [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1];
   let array2 = [5, 6, 4];
   let currNode1 = null;
   let headNode1 = null;
@@ -18,11 +18,11 @@
   }
   for (let j = 0; j < array2.length; j++) {
     if (currNode2) {
-      let tempNode = ListNode(array2[j]);
+      let tempNode = new ListNode(array2[j]);
       currNode2.next = tempNode;
       currNode2 = tempNode;
     } else {
-      let tempNode = ListNode(array2[j]);
+      let tempNode = new ListNode(array2[j]);
       currNode2 = tempNode;
       headNode2 = tempNode;
     }
@@ -30,6 +30,7 @@
   var addTwoNumbers = function (l1, l2) {
     let arr1 = [];
     let arr2 = [];
+    let arr3 = [];
     let currentNode = l1;
     while (currentNode) {
       arr1.push(currentNode.val);
@@ -40,7 +41,20 @@
       arr2.push(currentNode.val);
       currentNode = currentNode.next;
     }
-
+    let longest = arr1.length > arr2.length ? arr1.length : arr2.length;
+    for (let i = 0; i < longest; i++) {
+      let num1 = arr1[i] === undefined ? 0 : arr1[i];
+      let num2 = arr2[i] === undefined ? 0 : arr2[i];
+      let num3 = arr3[i] === undefined ? 0 : arr3[i];
+      let sum = num1 + num2 + num3;
+      if (sum >= 10) {
+        arr3[i] = sum - 10;
+        arr3.push(1);
+      } else {
+        arr3[i] = sum;
+      }
+    }
+    return arr3;
   };
   console.log(addTwoNumbers(headNode1, headNode2));
   // [6, 6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
