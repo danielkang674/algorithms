@@ -1,7 +1,30 @@
 <script>
   // Given a string, find the length of the longest substring without repeating characters.
-  var lengthOfLongestSubstring = function (s) {
-
+  const lengthOfLongestSubstring = (s) => {
+    // naive quadratic solution
+    let obj = {};
+    let substring = '';
+    let longest = 0;
+    for (let i = 0; i < s.length; i++) {
+      for (let j = i; j < s.length; j++) {
+        if (!obj[s[j]]) {
+          substring += s[j];
+          obj[s[j]] = true;
+        } else if (obj[s[j]]) {
+          let tempLength = substring.length;
+          longest = tempLength > longest ? tempLength : longest;
+          substring = '';
+          obj = {};
+          break;
+        }
+      }
+    }
+    let length = substring.length;
+    longest = length > longest ? length : longest;
+    return longest;
   };
-  console.log(lengthOfLongestSubstring("abcabcbb")); // 3
+  // console.log(lengthOfLongestSubstring("abcabcbb")); // 3
+  // console.log(lengthOfLongestSubstring("bbbbb")); // 1
+  // console.log(lengthOfLongestSubstring("pwwkew")); //3
+  console.log(lengthOfLongestSubstring("dvdf")); //3
 </script>
