@@ -1,0 +1,19 @@
+<script>
+  function sockMerchant(n, ar) {
+    let obj = {};
+    let counter = 0;
+    for (let i = 0; i < n; i++) {
+      if (!obj[ar[i]]) {
+        obj[ar[i]] = 1;
+      } else {
+        obj[ar[i]]++;
+        if (obj[ar[i]] === 2) {
+          counter++;
+          obj[ar[i]] = 0;
+        }
+      }
+    }
+    return counter;
+  }
+  console.log(sockMerchant(9, [10, 20, 20, 10, 10, 30, 50, 10, 20]));
+</script>
