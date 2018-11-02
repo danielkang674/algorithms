@@ -1,15 +1,45 @@
 <script>
   var longestPalindrome = function (s) {
-    const str = s.toLowerCase();
-    let left = '', right = '', pali = '', longest = '';
+    // 250 ms version
+    if (s === null || s.length <= 1) return s;
+    let longest = '';
+    const helper = (str, idx1, idx2) => {
+      while (str[idx1] === str[idx2] && idx1 >= 0 && idx2 < str.length) {
+        idx1--;
+        idx2++;
+      }
+      return str.substring(idx1 + 1, idx2);
+    };
+    for (let i = 0; i < s.length; i++) {
+      let tempStr1 = helper(s, i, i);
+      let tempStr2 = helper(s, i, i + 1);
+      let longer = tempStr1.length > tempStr2.length ? tempStr1 : tempStr2;
+      longest = longer.length > longest.length ? longer : longest;
+    }
+    return longest;
+
+    // my version
+    let pali = '', longest = '';
     let index = 0;
-    for (let i = 0; i < str.length; i++) {
-      while (str[i - index] === str[i + index]) {
-        if (!index) {
-          pali = str[i];
+    for (let i = 0; i < s.length; i++) {
+      while (s[i - index] === s[i + 1 + index] && s[i - index] !== undefined && s[i + 1 + index] !== undefined) {
+        if (index === 0) {
+          pali = s[i] + s[i + 1];
           index++;
         } else {
-          pali = str[i - index] + pali + str[i + index];
+          pali = s[i - index] + pali + s[i + 1 + index];
+          index++;
+        }
+      }
+      longest = pali.length > longest.length ? pali : longest;
+      pali = '';
+      index = 0;
+      while (s[i - index] === s[i + index] && s[i - index] !== undefined && s[i + index] !== undefined) {
+        if (index === 0) {
+          pali = s[i];
+          index++;
+        } else {
+          pali = s[i - index] + pali + s[i + index];
           index++;
         }
       }
@@ -22,4 +52,6 @@
   console.log(longestPalindrome('I like driving racecars.'));
   console.log(longestPalindrome('babad'));
   console.log(longestPalindrome('txabbapl'));
+  console.log(longestPalindrome('bbbb'));
+  console.log(longestPalindrome('ccc'));
 </script>
