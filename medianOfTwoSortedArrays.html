@@ -1,0 +1,30 @@
+<script>
+  var findMedianSortedArrays = function (nums1, nums2) {
+    const sumLength = nums1.length + nums2.length;
+    const isOdd = (sumLength % 2 === 1);
+    const mid = sumLength >> 1;
+    let curr, prev;
+    let index1 = 0;
+    let index2 = 0;
+    while (index1 + index2 <= mid) {
+      let val1 = nums1[index1];
+      let val2 = nums2[index2];
+      prev = curr;
+      if (val1 === undefined) {
+        curr = val2;
+        index2++;
+      } else if (val2 === undefined) {
+        curr = val1;
+        index1++;
+      } else if (val1 <= val2) {
+        curr = val1;
+        index1++;
+      } else if (val1 > val2) {
+        curr = val2;
+        index2++;
+      }
+    }
+    return isOdd ? curr : (curr + prev) / 2;
+  };
+  console.log(findMedianSortedArrays([1, 2], [3, 4]));
+</script>
