@@ -1,5 +1,25 @@
 <script>
   var longestPalindrome = function (s) {
-
+    const str = s.toLowerCase();
+    let left = '', right = '', pali = '', longest = '';
+    let index = 0;
+    for (let i = 0; i < str.length; i++) {
+      while (str[i - index] === str[i + index]) {
+        if (!index) {
+          pali = str[i];
+          index++;
+        } else {
+          pali = str[i - index] + pali + str[i + index];
+          index++;
+        }
+      }
+      longest = pali.length > longest.length ? pali : longest;
+      pali = '';
+      index = 0;
+    }
+    return longest;
   };
+  console.log(longestPalindrome('I like driving racecars.'));
+  console.log(longestPalindrome('babad'));
+  console.log(longestPalindrome('txabbapl'));
 </script>
