@@ -1,0 +1,18 @@
+<script>
+  function jumpingOnClouds(c) {
+    let index = 0;
+    let counter = 0;
+    while (index < c.length - 1) {
+      if (c[index + 2] === 0) {
+        index += 2;
+        counter++;
+      } else {
+        index++;
+        counter++;
+      }
+    }
+    return counter;
+  }
+  console.log(jumpingOnClouds([0, 0, 1, 0, 0, 1, 0])); //4
+  console.log(jumpingOnClouds([0, 0, 0, 0, 1, 0])); //3
+</script>
