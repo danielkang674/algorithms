@@ -1,0 +1,47 @@
+<script>
+  var convert = function (s, numRows) {
+    if (numRows === 1) return s;
+    let arr = [];
+    for (let j = 0; j < numRows; j++) {
+      arr.push([]);
+    }
+    let col = 0;
+    let row = 0;
+    let goingDown = true;
+    let diag = false;
+    let i = 0;
+    while (i < s.length) {
+      if (row < numRows && goingDown) {
+        arr[row][col] = s[i];
+        row++;
+        i++;
+      } else if (row >= numRows) {
+        goingDown = false;
+        diag = true;
+        row = numRows - 2;
+        col++;
+        arr[row][col] = s[i];
+        i++;
+      } else if (row > 1 && diag) {
+        row--;
+        col++;
+        arr[row][col] = s[i];
+        i++;
+      } else if (row === 1 && diag) {
+        row--;
+        col++;
+        arr[row][col] = s[i];
+        row++;
+        goingDown = true;
+        i++;
+      } else if (row === 0 && diag) {
+        row++;
+        diag = false;
+        goingDown = true;
+      }
+    }
+    return arr.reduce((acc, cval) => acc = acc + cval.join(''), '');
+  };
+  console.log(convert("ABCD", 2)); // "ACBD"
+  console.log(convert("ABC", 2)); // "ACB"
+</script>
