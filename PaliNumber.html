@@ -4,17 +4,11 @@
     if (x < 10) return true;
 
     let num = x;
-    const stack = [];
-    while (num > 0) {
-      let tempNum = num % 10;
-      stack.push(tempNum);
-      num = ~~(num / 10);
-    }
-
     let reversed = 0;
-    for (let i = 0; i < stack.length; i++) {
+    while (num > 0) {
       reversed *= 10;
-      reversed += stack[i];
+      reversed += num % 10;
+      num = ~~(num / 10);
     }
 
     if (x === reversed) return true;
