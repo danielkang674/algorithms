@@ -1,9 +1,26 @@
 <script>
   var isPalindrome = function (x) {
     if (x < 0) return false;
+    if (x < 10) return true;
 
-    let str = x.toString().split('').reverse().join('');
-    if (x.toString() === str) return true;
+    let num = x;
+    const stack = [];
+    while (num > 0) {
+      let tempNum = num % 10;
+      stack.push(tempNum);
+      num = ~~(num / 10);
+    }
+
+    let reversed = 0;
+    for (let i = 0; i < stack.length; i++) {
+      reversed *= 10;
+      reversed += stack[i];
+    }
+
+    if (x === reversed) return true;
     return false;
   };
+  console.log(isPalindrome(10));
+  console.log(isPalindrome(121));
+  console.log(isPalindrome(-101));
 </script>
