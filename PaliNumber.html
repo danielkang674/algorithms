@@ -1,0 +1,9 @@
+<script>
+  var isPalindrome = function (x) {
+    if (x < 0) return false;
+
+    let str = x.toString().split('').reverse().join('');
+    if (x.toString() === str) return true;
+    return false;
+  };
+</script>
