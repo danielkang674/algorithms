@@ -1,0 +1,18 @@
+<script>
+  function countingValleys(n, s) {
+    let counter = 0;
+    let valleys = 0;
+    const direction = { 'U': 1, 'D': -1 }
+    for (let i = 0; i < n; i++) {
+      if (counter === 0 && s[i] === 'D') {
+        counter += direction[s[i]];
+        valleys++;
+      } else {
+        counter += direction[s[i]];
+      }
+    }
+    return valleys;
+  }
+  console.log(countingValleys(8, 'UDDDUDUU')); // 1
+  console.log(countingValleys(8, 'DDUUUUDD')); // 1
+</script>

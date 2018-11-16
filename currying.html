@@ -1,0 +1,13 @@
+<script>
+  const currying = (...x) => {
+
+    return (...y) => {
+      return (...z) => {
+        return [...x, ...y, ...z];
+      }
+    }
+  }
+
+  let test = currying(1, 2, 3)(2)(3);
+  console.log(test);
+</script>

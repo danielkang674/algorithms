@@ -1,0 +1,23 @@
+<script>
+  function repeatedStrings(s, n) {
+    let repeated = Math.floor(n / s.length);
+    let remainder = n % s.length;
+    let counter = 0;
+    let extra = 0;
+
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] === 'a') {
+        counter++;
+      }
+      if (s[i] === 'a' && i < remainder) {
+        extra++;
+      }
+    }
+
+    return (counter * repeated) + extra;
+
+  }
+
+  console.log(repeatedStrings('aba', 10)); // 7
+  console.log(repeatedStrings('a', 1000000000000));
+</script>
