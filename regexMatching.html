@@ -28,6 +28,7 @@
     if (i === s.length) {
       return true;
     }
+
     return false;
   };
   console.log(isMatch('aa', 'a')); // false
@@ -35,4 +36,6 @@
   console.log(isMatch('ab', '.*')); // true
   console.log(isMatch('aab', 'c*a*b')); // true
   console.log(isMatch('mississippi', 'mis*is*p*')); // false
+  console.log(isMatch('ab', '.*c')); // false
+  console.log(isMatch('aaa', 'a*a')); // false
 </script>
