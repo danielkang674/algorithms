@@ -1,15 +1,26 @@
 <script>
   var maxArea = function (height) {
-    let biggest = 0;
-    for (let i = 0; i < height.length; i++) {
-      for (let j = i + 1; j < height.length; j++) {
-        let tempWidth = j - i;
-        let tempHeight = Math.min(height[j], height[i]);
-        let area = tempWidth * tempHeight;
-        biggest = biggest < area ? area : biggest;
+    if (height.length === 2) return Math.min(height[0], height[1]);
+    let highest = 0;
+    let head = 0;
+    let tail = height.length - 1;
+    while (tail > head) {
+      let hval = height[head];
+      let tval = height[tail];
+      let temp = Math.min(hval, tval) * (tail - head);
+      highest = highest > temp ? highest : temp;
+      if (hval > tval) {
+        tail--;
+      } else if (hval < tval) {
+        head++;
+      } else if (hval === tval) {
+        head++;
+        tail--;
       }
     }
-    return biggest;
+    return highest;
   };
-  console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+  console.log(maxArea([9, 6, 14, 11, 2, 2, 4, 9, 3, 8])); //72
+  console.log(maxArea([9, 15, 14, 11, 2, 2, 4, 15, 3, 8])); // 90
+  console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7])); // 49
 </script>
