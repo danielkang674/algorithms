@@ -2,9 +2,11 @@
   var threeSum = function (nums) {
     if (nums.length < 3) return [];
     let ans = [];
-    let obj = {};
     nums = nums.sort((a, b) => a - b);
     for (let i = 0; i < nums.length - 2; i++) {
+      if (i > 0 && nums[i] === nums[i - 1]) {
+        continue;
+      }
       let j = i + 1;
       let k = nums.length - 1;
       while (j < k) {
@@ -13,10 +15,12 @@
         let num3 = nums[k];
         let sum = num1 + num2 + num3;
         if (sum === 0) {
-          let hash = num1.toString() + num2.toString() + num3.toString();
-          if (!obj[hash]) {
-            obj[hash] = true;
-            ans.push([num1, num2, num3]);
+          ans.push([num1, num2, num3]);
+          while (num2 === nums[j + 1]) {
+            j++;
+          }
+          while (num3 === nums[k - 1]) {
+            k--;
           }
           j++;
           k--;
