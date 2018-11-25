@@ -1,13 +1,19 @@
 <script>
-  const currying = (...x) => {
+  const currying = (func) => {
 
-    return (...y) => {
-      return (...z) => {
-        return [...x, ...y, ...z];
+    return (...x) => {
+      return (...y) => {
+        return (...z) => {
+          return func(...x, ...y, ...z);
+        }
       }
     }
-  }
+  };
 
-  let test = currying(1, 2, 3)(2)(3);
-  console.log(test);
+  const concater = (...stuff) => {
+    return stuff;
+  };
+
+  let test = currying(concater);
+  console.log(test(1, 2, 3)(2)(3));
 </script>

@@ -1,0 +1,31 @@
+<script>
+  const compose = (...funcs) => {
+    return (...args) => {
+      let output;
+      for (let i = funcs.length - 1; i >= 0; i--) {
+        if (output) {
+          if (Array.isArray(output)) {
+            output = funcs[i].apply(this, output);
+          } else {
+            output = funcs[i].call(this, output);
+          }
+        } else {
+          output = funcs[i].apply(this, args);
+        }
+      }
+      return output;
+    }
+  };
+
+  const consider = (name) => {
+    return `I think it could be... ${name}`;
+  };
+
+  const exclaim = (statement) => {
+    return `${statement.toUpperCase()}!`;
+  };
+
+  const blame = compose(consider, exclaim);
+
+  console.log(blame('you')); // 'I think it could be... YOU!'
+</script>
