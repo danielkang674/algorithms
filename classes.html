@@ -1,0 +1,40 @@
+<script>
+  class User {
+    // Function part of the User function object
+    constructor(name, score) {
+      this.name = name;
+      this.score = score;
+      // Anti-pattern don't do it
+      // Attaches a copy of show stats method onto each object instance
+      this.showStats = function () {
+        console.log(`${this.name} has ${this.score} points`);
+      };
+    }
+    // Attached to User object's prototype object
+    incrementScore() {
+      this.score++;
+    }
+  };
+  class PaidUser extends User {
+    constructor(PaidName, score, initialBal) {
+      // Reflect.construct under the hood
+      // this = Reflect.construct(User, [Paidname, score], PaidUser)
+      // this = new User() but proto points to PaidUser's prototype object
+      super(PaidName, score);
+      this.balance = initialBal;
+    }
+    showBalance() {
+      console.log(`${this.name} has $${this.balance}`);
+    }
+  };
+  const user1 = new User('Joe', 5);
+  const paidUser1 = new PaidUser('Sally', 6, 10);
+  user1.showStats();
+  paidUser1.showStats();
+  console.log(user1.showBalance === undefined);
+  paidUser1.showBalance();
+  console.log(User.prototype);
+  console.log(user1, paidUser1);
+  console.log(user1.showStats === paidUser1.showStats);
+  console.log(user1.__proto__.incrementScore === paidUser1.__proto__.incrementScore);
+</script>
