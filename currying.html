@@ -4,14 +4,14 @@
     return (...x) => {
       return (...y) => {
         return (...z) => {
-          return func(...x, ...y, ...z);
+          return func(x, y, z);
         }
       }
     }
   };
 
-  const concater = (...stuff) => {
-    return stuff;
+  const concater = (x, y, z) => {
+    return [...x, ...y, ...z];
   };
 
   let test = currying(concater);
