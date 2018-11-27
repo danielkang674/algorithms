@@ -1,0 +1,22 @@
+<script>
+  let date = Date.now();
+  let nthFibonacci = function (n) {
+    if (n <= 1) {
+      return n;
+    }
+    let currSum = 1;
+    let prevSum = 0;
+    let index = 2;
+    while (index <= n) {
+      let tempSum = currSum;
+      currSum = prevSum + currSum;
+      prevSum = tempSum;
+      index++;
+    }
+    return currSum;
+  };
+  console.log(nthFibonacci(2));
+  console.log(nthFibonacci(4));
+  console.log(nthFibonacci(5));
+  console.log(nthFibonacci(6));
+</script>
