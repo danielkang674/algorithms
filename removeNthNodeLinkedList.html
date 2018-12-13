@@ -12,14 +12,34 @@
       node = node.next;
     }
   }
-  /**
-   * @param {ListNode} head
-   * @param {number} n
-   * @return {ListNode}
-   */
   var removeNthFromEnd = function (head, n) {
-
+    let length = 0;
+    let counter = 0;
+    let nNode;
+    let node = head;
+    let prevNode = head;
+    while (node) {
+      length++;
+      node = node.next;
+    }
+    nNode = length - (n - 1);
+    node = head;
+    if (n === length) {
+      head = head.next;
+      return head;
+    }
+    while (node) {
+      counter++;
+      if (nNode === counter) {
+        prevNode.next = node.next;
+      } else {
+        prevNode = node;
+        node = node.next;
+      }
+    }
+    return head;
   };
+
   let first = new ListNode(1);
   let second = new ListNode(2);
   let third = new ListNode(3);
@@ -32,4 +52,7 @@
   fourth.next = fifth;
 
   logList(first);
+
+  let list = removeNthFromEnd(first, 5);
+  logList(list);
 </script>
