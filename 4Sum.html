@@ -1,0 +1,32 @@
+<script>
+  const fourSum = (arr, target) => {
+    arr = arr.sort((a, b) => a - b);
+    let ans = [];
+    let obj = {};
+    for (let i = 0; i < arr.length - 2; i++) {
+      for (let j = i + 1; j < arr.length - 1; j++) {
+        let head = j + 1;
+        let tail = arr.length - 1;
+        while (head < tail) {
+          let sum = arr[i] + arr[j] + arr[head] + arr[tail];
+          if (sum === target) {
+            let hash = '';
+            hash += [arr[i], arr[j], arr[head], arr[tail]];
+            obj[hash] = [arr[i], arr[j], arr[head], arr[tail]];
+            head++;
+            tail--;
+          } else if (sum < target) {
+            head++;
+          } else if (sum > target) {
+            tail--;
+          }
+        }
+      }
+    }
+    for (let key in obj) {
+      ans.push(obj[key]);
+    }
+    return ans;
+  };
+  console.log(fourSum([-3, -2, -1, 0, 0, 1, 2, 3], 0));
+</script>
