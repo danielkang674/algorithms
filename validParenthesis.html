@@ -1,7 +1,6 @@
 <script>
   var isValid = function (s) {
-    let bool = true;
-    let pairs = { ")": "(", "}": "{", "[": "]" };
+    let pairs = { ")": "(", "}": "{", "]": "[" };
     let left = { "(": true, "{": true, "[": true };
     let index = 0;
     let stack = [];
@@ -11,13 +10,12 @@
       } else if (pairs[s[index]]) {
         let temp = stack.pop();
         if (temp !== pairs[s[index]]) {
-          bool = false;
-          break;
+          return false;
         }
       }
       index++;
     }
-    return bool;
+    return stack.length ? false : true;
   };
   console.log(isValid("()")) //Output: true
   console.log(isValid("()[]{}")) //Output: true
