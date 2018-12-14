@@ -1,0 +1,27 @@
+<script>
+  var isValid = function (s) {
+    let bool = true;
+    let pairs = { ")": "(", "}": "{", "[": "]" };
+    let left = { "(": true, "{": true, "[": true };
+    let index = 0;
+    let stack = [];
+    while (index < s.length) {
+      if (left[s[index]]) {
+        stack.push(s[index]);
+      } else if (pairs[s[index]]) {
+        let temp = stack.pop();
+        if (temp !== pairs[s[index]]) {
+          bool = false;
+          break;
+        }
+      }
+      index++;
+    }
+    return bool;
+  };
+  console.log(isValid("()")) //Output: true
+  console.log(isValid("()[]{}")) //Output: true
+  console.log(isValid("(]")) // Output: false
+  console.log(isValid("([)]")) //Output: false
+  console.log(isValid("{[]}")) //Output: true
+</script>
