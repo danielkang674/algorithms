@@ -1,0 +1,21 @@
+<script>
+  var generateParenthesis = function (n) {
+    const allCombs = [];
+
+    const inner = (parens, open, close) => {
+      if (open === n && close === n) {
+        allCombs.push(parens);
+        return;
+      }
+      if (close < open) {
+        inner(parens + ')', open, close + 1);
+      }
+      if (open < n) {
+        inner(parens + '(', open + 1, close);
+      }
+    };
+    inner('(', 1, 0);
+    return allCombs;
+  };
+  console.log(generateParenthesis(0));
+</script>
