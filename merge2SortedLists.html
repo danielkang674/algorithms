@@ -16,8 +16,9 @@
     let p1 = l1;
     let p2 = l2;
     let head = null;
+    let tail = null;
 
-    while (p1 !== null && p2 !== null) {
+    while (p1 !== null || p2 !== null) {
       let smaller;
       if (p1 !== null && p2 !== null) {
         if (p1.val < p2.val) {
@@ -36,8 +37,10 @@
       }
       if (head === null) {
         head = new ListNode(smaller);
+        tail = head;
       } else {
-        head.next = new ListNode(smaller);
+        tail.next = new ListNode(smaller);
+        tail = tail.next;
       }
     }
     return head;
