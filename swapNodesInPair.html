@@ -14,11 +14,11 @@
 
   var swapPairs = function (head) {
     let p1 = head;
-    let p2 = head.next;
+    let p2 = head === null ? null : head.next;
     let p3 = null;
     let first = true;
 
-    while (p1 !== null || p2 !== null) {
+    while (p1 !== null && p2 !== null) {
       p1.next = p2.next;
       p2.next = p1;
       p3 = p1;
