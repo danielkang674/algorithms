@@ -15,17 +15,20 @@
   var swapPairs = function (head) {
     let p1 = head;
     let p2 = head.next;
+    let p3 = null;
     let first = true;
 
     while (p1 !== null || p2 !== null) {
       p1.next = p2.next;
       p2.next = p1;
+      p3 = p1;
       if (first) {
         head = p2;
         first = false;
       }
       p1 = p1.next;
-      p2 = p1.next;
+      p2 = p1 === null ? null : p1.next;
+      p3.next = p2 === null ? p1 : p2;
     }
     return head;
   };
@@ -43,6 +46,6 @@
   fourth.next = fifth;
   fifth.next = sixth;
 
-  let list = mergeTwoLists(first, fourth);
+  let list = swapPairs(first, fourth);
   logList(list);
 </script>
