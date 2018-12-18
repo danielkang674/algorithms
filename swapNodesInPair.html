@@ -13,7 +13,21 @@
   }
 
   var swapPairs = function (head) {
+    let p1 = head;
+    let p2 = head.next;
+    let first = true;
 
+    while (p1 !== null || p2 !== null) {
+      p1.next = p2.next;
+      p2.next = p1;
+      if (first) {
+        head = p2;
+        first = false;
+      }
+      p1 = p1.next;
+      p2 = p1.next;
+    }
+    return head;
   };
 
   let first = new ListNode(1);
