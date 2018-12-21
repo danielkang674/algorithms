@@ -1,23 +1,14 @@
 <script>
   var removeElement = function (nums, val) {
-    if (nums.length === 1 && nums[0] === val) {
-      nums.splice(0, 1);
-      return 0;
-    }
-    let end = nums.length - 1;
     let i = 0;
-    while (i < end) {
+    while (i < nums.length) {
       if (nums[i] === val) {
-        while (nums[end] === val) {
-          end--;
-        }
-        nums[i] = nums[end];
-        nums[end] = val;
-        end--;
+        nums.splice(i, 1);
+      } else {
+        i++;
       }
-      i++;
     }
-    return end + 1;
+    return nums.length;
   };
   let a = removeElement([3, 2, 2, 3], 3);
   let b = removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
