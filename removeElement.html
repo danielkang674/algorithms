@@ -1,14 +1,15 @@
 <script>
   var removeElement = function (nums, val) {
-    let i = 0;
-    while (i < nums.length) {
-      if (nums[i] === val) {
-        nums.splice(i, 1);
-      } else {
-        i++;
+    let mutateIndex = 0;
+    let returnIndex = 0;
+    for (let i = 0; i < nums.length; i++) {
+      if (nums[i] !== val) {
+        nums[mutateIndex] = nums[i];
+        mutateIndex++;
+        returnIndex++;
       }
     }
-    return nums.length;
+    return returnIndex;
   };
   let a = removeElement([3, 2, 2, 3], 3);
   let b = removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2);
