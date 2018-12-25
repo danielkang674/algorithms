@@ -1,15 +1,16 @@
 <script>
   var strStr = function (haystack, needle) {
     if (needle.length < 1) return 0;
-    let start = 0;
-    let end = needle.length;
     for (let i = 0; i < haystack.length; i++) {
-      let sub = haystack.substring(start, end);
-      if (sub === needle) {
-        return start;
+      let hidx = i;
+      let nidx = 0;
+      while (haystack[hidx] === needle[nidx]) {
+        hidx++;
+        nidx++;
       }
-      start++;
-      end++;
+      if (nidx === needle.length) {
+        return i;
+      }
     }
     return -1;
   };
