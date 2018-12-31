@@ -1,0 +1,52 @@
+<script>
+  var nextPermutation = function (nums) {
+    let first = -1;
+    for (let i = nums.length - 2; i >= 0; i--) {
+      if (nums[i] < nums[i + 1]) {
+        first = i;
+        break;
+      }
+    }
+    if (first >= 0) {
+      for (let j = nums.length - 1; j >= 0; j--) {
+        let dunno = nums[j];
+        if (nums[first] < dunno) {
+          swap(first, j);
+          break;
+        }
+      }
+    }
+    first = first === null ? 0 : first;
+    reverse(first + 1, nums.length - 1);
+    function swap(a, b) {
+      let temp = nums[a];
+      nums[a] = nums[b];
+      nums[b] = temp;
+    }
+    function reverse(c, d) {
+      while (c < d) {
+        swap(c, d);
+        c++;
+        d--;
+      }
+    }
+  };
+  let nums = [1, 2, 3];
+  nextPermutation(nums); // 1, 3, 2
+  console.log(nums);
+  nums = [1, 3, 2];
+  nextPermutation(nums);
+  console.log(nums); // 2, 1, 3
+  nums = [2, 3, 1];
+  nextPermutation(nums);
+  console.log(nums); // 3, 1, 2
+  nums = [3, 2, 1];
+  nextPermutation(nums); // 1, 2, 3
+  console.log(nums);
+  nums = [1, 1, 5];
+  nextPermutation(nums); // 1, 5, 1
+  console.log(nums);
+  nums = [4, 2, 0, 2, 3, 2, 0];
+  nextPermutation(nums);
+  console.log(nums); // [4,2,0,3,0,2,2]
+</script>
